@@ -317,4 +317,88 @@ lúc này repo abc sẽ được chứa trong thư mục subfolder
 
 # Git ignore 
 
+Git ignore là một file dùng để loại những file/thư mục không mong muốn đưa vào **Repository** khi dùng **"git add ."**. Lý do có thể các file/ thư mục đó là file build được sinh ra khi chạy, thư mục chứa thư viện do phần mềm sinh code tạo ra, những nội dung có dung lượng lớn, khi upload/download server github sẽ bị chậm đi
 
+Tạo ra một file **.gitignore** trên command line:
+
+```
+git init (nếu chưa khởi tạo repo)
+
+touch .gitignore
+```
+
+__*Lưu ý*__ : những file/thư mục nào trước đó đã được stage change (dùng **git add**) thì khi được thêm vào **.gitignore**, file/thư mục đó vẫn không bị ignore vì chúng đã được **cached** bởi **Repository**, để khắc phục việc này, cần phải uncached bằng lệnh:
+
+```
+git rm -r --cached
+``` 
+Sau đó cached lại:
+```
+git add .
+```
+Có thể kiểm tra lại để xem các file được staged change bằng lệnh:
+```
+git status
+```
+
+## Cách sử dụng .gitignore
+
+Giả sử có một folder cấu trúc như sau:
+```
+Project
+|---Core/
+|    |----Src/
+|    |     |-- main.c
+|    |     |-- filea.c
+|    |     |-- fileb.c
+|    |     |-- etc.c
+|    |----Startup/
+|
+|---Inc/
+|    |-- main.h
+|    |-- filea.h
+|    |-- fileb.h
+|    |-- etc.h
+|
+|---Drivers/
+|
+|---Debug/
+|config.txt
+|config.h
+|UserConfig.txt
+|Temp.txt
+|UserTemp.c
+|UserTemp.h
+```
+
+1. Tạo **Repository**
+```
+git init
+```
+2. Tạo file **.gitignore**
+```
+touch .gitignore
+```
+3. Thêm nội dung vào .gitignore
+
+```
+# ignore thư mục Debug
+Debug/
+# ignore thư mục Drivers
+Drivers/
+# Giữ lại file main.c trong thư mục Core, phần còn lại ignore hết
+Core/*
+!Core/Src/main.c
+# Giữ lại file main.h trong thư mục Inc, phần còn lại ignore hết
+Inc/*
+!Inc/main.h
+# ignore thư mục Startup, giữ lại Src
+Core/Startup/*
+# ignore các file có đuôi .txt
+*.txt
+# ignore các file bắt đầu bằng User
+User*
+# ignore các file bắt đầu bằng User nhưng giữ lại đuôi .h
+User*
+!User*.h
+```
