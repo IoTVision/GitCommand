@@ -1,4 +1,4 @@
-# GitCommand
+# Git
 
 # Cấu trúc Git
 
@@ -7,7 +7,76 @@ Git bao gồm 3 thành phần cơ bản sau:
  * Local: Đây là nơi file có thể thay đổi, sửa xóa tùy ý như một file thông thường, không có bất cứ tác động nào của git nếu không được git theo dõi (tracking), nơi này nằm trong máy tính
  * Repository: Một khi file được thêm vào đây, nó sẽ được theo dõi (tracking) với local, bất cứ sự thay đổi nào giữa nội dung file thuộc repo và nội dung của chính file đó trên local đều được git so sánh sự khác nhau nội dung file. Nơi này nằm trong máy tính
  * Remote: đây là server git trên github, dùng để lưu trữ, đồng bộ file giữa các developer với nhau, sửa lỗi issue phát sinh, phát hành bản chính outsource code..., nơi này nằm trên cloud
- 
+
+# Thao tác cơ bản với git
+## Chuẩn bị
+- Đăng ký tài khoản github
+- Tải [Git Bash](https://git-scm.com/downloads)
+- Tạo một repository trống trên github
+## Thao tác với git trên local
+1. Chọn một thư mục Workspace, mở **Git Bash** tại đây và gõ:
+```
+git init
+```
+Lúc này một **Repository** trống sẽ xuất hiện và có tên nhánh mặc định là **master**
+
+2. Tạo một file a.txt
+```
+touch a.txt
+```
+Thêm nội dung vào a.txt
+```
+Làm việc với git
+```
+3. Save lại và thoát, trên **Git Bash** gõ:
+```
+git add a.txt
+```
+File a.txt được thêm vào cached của **Repository**, lúc này file a.txt đang ở trạng thái **staged change**. 
+
+Nếu có nhiều file muốn **add** cùng lúc thì:
+```
+git add .
+```
+
+4. Gõ:
+```
+git commit -m "Thêm file a.txt"
+```
+Khi gọi lệnh **commit**, **Repository** sẽ lưu lại nội dung của file a.txt, option __*-m*__ dùng để ghi lại nội dung commit dưới dạng **Tiêu đề** (ghi nội dung chính, vắn tắt những gì mình đã thay đổi, thêm, sửa, xóa ...), nếu không có option __*-m*__ thì commit sẽ được ghi chi tiết (sẽ nói chi tiết hơn ở lệnh commit)
+
+5. Liên kết giữa local với remote:
+
+```
+git remote add origin <đường link dẫn tới remote>
+```
+* Thay thế <đường link dẫn tới remote> bằng tên của đường link thực tế tạo ở mục **Chuẩn bị**
+
+6. Đẩy file lên remote:
+```
+git push 
+
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+```
+Gõ lại theo lệnh được git gợi ý:
+```
+git push --set-upstream origin master
+```
+Vậy là đã hoàn thành việc đẩy dữ liệu lên git remote từ local
+
+## Đồng bộ thông tin từ remote xuống local
+Nếu Workspace trống chưa có git, thực hiện clone git từ remote
+```
+git clone <Link dẫn tới Repository>
+```
+Nếu Workspace đã liên kết với remote và đồng bộ nội dung mới các file:
+```
+git pull
+```
+
 # Các lệnh thường dùng
 
 ### __*git init*__ 
@@ -113,7 +182,7 @@ File c.txt đã thay đổi ...
 ```
 3. Sau khi ghi xong, nhấn Ctrl+C để thoát INSERT, gõ  __*:wq*__ (Write and Quit) để save và thoát commit
 
-### git branch
+### __*git branch*__
 Tạo ra một nhánh mới từ mã số commit đang dùng của nhánh hiện tại (lưu ý nếu không có commit nào thì không dùng được)
 ```
 git branch SpiritBoi
@@ -130,7 +199,7 @@ git branch -d SpiritBoi
 git branch
 ```
 
-### git checkout (hay git switch)
+### __*git checkout (hay git switch)*__
 
 - Với option __*b*__: Tạo ra một nhánh mới từ mã số commit đang dùng của nhánh hiện tại và nhảy tới nhánh đó
 
@@ -160,14 +229,14 @@ Ví dụ
 git checkout --track origin/Develop
 ```
 
-### git clone
+### __*git clone*__
 Dowload __*Repository*__ từ Remote (server github) xuống local __*Repo*__
 
 ```
 git clone <Đường link dẫn tới Repo đó>
 ```
 
-### git remote
+### __*git remote*__
 
 Đây là lệnh thao tác với Repository của **Remote** trên server github
 
@@ -184,7 +253,7 @@ option **rm**: Hủy liên kết giữa **Local** và **Remote**
 git remote rm origin
 ```
 
-### git push 
+### __*git push*__
 
 Đẩy commit từ local lên remote
 
@@ -219,7 +288,7 @@ git push origin --delete <nhánh cần xóa>
 
 **git push -u origin <Tên nhánh>**: dùng để push lên nhánh được đặt tên
 
-### git log
+### __*git log*__
 
 In ra lịch sử commit chi tiết (ngày giờ, mail người commit, nội dung commit chi tiết)
 
@@ -239,11 +308,11 @@ option **--graph**: dùng để hiển thị commit theo dạng biểu đồ
 git log --oneline --graph
 ```
 
-### git status
+### __*git status*__
 
 Kiểm tra trạng thái hiện tại của **Repository**
 
-### git restore 
+### __*git restore*__
 
 Khôi phục file về trạng thái trước đó
 
@@ -255,7 +324,7 @@ Sử dụng option '.' để add tất cả vào cùng lúc
 git restore --stage <file cần restore>
 ```
 
-### git merge
+### __*git merge*__
 
 Hợp nhất **Repository** của nhánh hiện tại với **Repository** của nhánh cần merge
 
@@ -268,11 +337,11 @@ option **--abort** dùng để hủy hợp nhất
 ```
 git merge --abort
 ```
-### git pull
+### __*git pull*__
 
 Đồng bộ file giữa nhánh trên local và remote 
 
-### git tag
+### __*git tag*__
 
 * Gắn nhãn cho commit cũ:
 
@@ -305,14 +374,14 @@ git tag -d <Tag>
 git tag -d V1.0.2
 ```
 
-### git submodule
+### __*git submodule*__
 
 git submodule add < remote_url >  < thư mục chứa submodule >
 
 ```
 git submodule add https://github.com/Username/abc.git subfolder
 ```
-lúc này repo abc sẽ được chứa trong thư mục subfolder
+Lúc này repo abc sẽ được chứa trong thư mục subfolder
 
 
 # Git ignore 
