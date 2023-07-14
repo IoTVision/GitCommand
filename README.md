@@ -471,3 +471,36 @@ User*
 User*
 !User*.h
 ```
+# Hướng dẫn checkout branch ở remote với lần đầu clone repository về local 
+
+
+1. Clone Repository về máy:
+
+```
+git clone <đường dẫn của repo>
+```
+
+2. Kiểm tra sau khi clone thì repository trên local đã có đầy đủ các nhánh chưa bằng git pull:
+
+```
+git pull
+```
+Nếu repository đã cập nhật đầy đủ thì command window sẽ trả về
+```
+Already up to date.
+```
+3. Checkout vào branch mình cần trên remote:
+```
+git checkout -- track origin/<branch cần checkout>
+```
+Kết quả thông báo việc checkout qua nhánh đã thành công 
+```
+Switched to a new branch '<branch cần checkout>'
+branch '<branch cần checkout>' set up to track 'origin/<branch cần checkout>'
+```
+__*Lưu ý*__: Những lần checkout sau này sang các branch khác trên remote, chỉ cần sử dụng git checkout bình thường, không cần gõ thêm --track origin
+```
+git checkout <branch #2 cần checkout>
+Switched to a new branch '<branch #2 cần checkout>'
+branch '<branch #2 cần checkout>' set up to track 'origin/<branch #2 cần checkout>'
+```
