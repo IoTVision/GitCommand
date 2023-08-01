@@ -491,7 +491,7 @@ Already up to date.
 ```
 3. Checkout vào branch mình cần trên remote:
 ```
-git checkout -- track origin/<branch cần checkout>
+git checkout --track origin/<branch cần checkout>
 ```
 Kết quả thông báo việc checkout qua nhánh đã thành công 
 ```
