@@ -199,6 +199,14 @@ git branch -d SpiritBoi
 git branch
 ```
 
+Để thay đổi tên của nhánh hiện tại, sử dụng option __*-M*__ như sau:
+
+Ví dụ nhánh hiện tại tên là master, để đổi tên thành nhánh SpiritBoi thì thực hiện như sau:
+
+```
+git branch -M SpiritBoi
+```
+
 ### __*git checkout (hay git switch)*__
 
 - Với option __*b*__: Tạo ra một nhánh mới từ mã số commit đang dùng của nhánh hiện tại và nhảy tới nhánh đó
